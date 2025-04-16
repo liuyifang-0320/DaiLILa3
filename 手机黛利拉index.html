@@ -1,199 +1,232 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>致黛利拉</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      -webkit-tap-highlight-color: transparent;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>致黛利拉</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
 
-    body {
-      height: 100vh;
-      width: 100vw;
-      background-image: url('https://i.postimg.cc/BvXyzGM4/image.jpg');
-      background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-family: 'Georgia', 'Times New Roman', serif;
-      overflow: hidden;
-      background-color: black;
-      touch-action: manipulation;
-    }
+        body {
+            height: 100vh;
+            width: 100vw;
+            background-image: url('https://i.postimg.cc/BvXyzGM4/image.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-family: 'Georgia', 'Times New Roman', serif;
+            text-align: center;
+            overflow: hidden;
+            cursor: pointer;
+            touch-action: manipulation;
+            background-color: black;
+        }
 
-    .quote-box {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background-color: rgba(0, 0, 0, 0.75);
-      padding: 20px 30px;
-      border-radius: 12px;
-      width: 90%;
-      max-width: 450px;
-      color: #f0e68c;
-      font-size: 1.5rem;
-      text-align: center;
-      opacity: 0;
-      visibility: hidden;
-      transition: all 1s ease-in-out;
-      z-index: 2;
-      border: 2px solid #f0e68c;
-      box-shadow: 0 0 15px rgba(255, 223, 0, 0.8);
-      font-family: 'Garamond', serif;
-    }
+        .quote-box {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.75);
+            padding: 20px 30px;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 450px;
+            color: #f0e68c;
+            font-size: 1.5rem;
+            text-align: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 1s ease-in-out;
+            z-index: 2;
+            border: 2px solid #f0e68c;
+            box-shadow: 0 0 15px rgba(255, 223, 0, 0.8);
+            font-family: 'Garamond', serif;
+        }
 
-    .quote-box.show {
-      opacity: 1;
-      visibility: visible;
-    }
+        .quote-box.show {
+            opacity: 1;
+            visibility: visible;
+        }
 
-    .music-player {
-      position: fixed;
-      left: 10px;
-      bottom: 10px;
-      background-color: rgba(0, 0, 0, 0.7);
-      color: #fff;
-      border-radius: 50%;
-      width: 50px;
-      height: 50px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      cursor: pointer;
-      font-size: 20px;
-      box-shadow: 0 0 10px rgba(255, 223, 0, 0.8);
-      z-index: 100;
-    }
+        .music-player {
+            position: fixed;
+            left: 10px;
+            bottom: 10px;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            font-size: 20px;
+            box-shadow: 0 0 10px rgba(255, 223, 0, 0.8);
+            z-index: 100;
+        }
 
-    .meteor {
-      position: fixed;
-      top: -10px;
-      width: 2px;
-      height: 80px;
-      background: linear-gradient(-45deg, gold, transparent);
-      opacity: 0.8;
-      transform: rotate(45deg);
-      animation: fall 2s linear forwards;
-      z-index: 0;
-    }
+        .memory-slider {
+            position: absolute;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90vw;
+            max-width: 400px;
+            height: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 0 15px rgba(255, 223, 0, 0.5);
+            z-index: 1;
+        }
 
-    @keyframes fall {
-      0% {
-        transform: translate(0, 0) rotate(45deg);
-        opacity: 1;
-      }
-      100% {
-        transform: translate(-100vw, 100vh) rotate(45deg);
-        opacity: 0;
-      }
-    }
+        .memory-wrapper {
+            position: relative;
+            width: 100%;
+        }
 
-    @media (max-width: 768px) {
-      .quote-box {
-        font-size: 1.2rem;
-        padding: 15px 25px;
-        width: 90%;
-        max-width: 380px;
-      }
-    }
+        .memory-image {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            position: absolute;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            border-radius: 12px;
+        }
 
-    @media (max-width: 480px) {
-      .quote-box {
-        font-size: 1rem;
-        padding: 10px 20px;
-        width: 90%;
-        max-width: 330px;
-      }
-    }
-  </style>
+        .memory-image.active {
+            opacity: 1;
+            z-index: 2;
+        }
+
+        .alt-text {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.6);
+            color: #f0e68c;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 1rem;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+            pointer-events: none;
+            z-index: 3;
+        }
+
+        @media (max-width: 768px) {
+            .quote-box {
+                font-size: 1.2rem;
+                padding: 15px 25px;
+                max-width: 380px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .quote-box {
+                font-size: 1rem;
+                padding: 10px 20px;
+                max-width: 330px;
+            }
+        }
+    </style>
 </head>
 <body>
 
-  <!-- 语录框（只显示一个框，通过JS切换内容） -->
-  <div class="quote-box" id="quoteBox"></div>
+    <div class="quote-box">“黛利拉，记住，有爱，就会归来”</div>
+    <div class="quote-box">“凭此船票，无限登船”</div>
+    <div class="quote-box">“小黛值得世间一切美好的东西”</div>
+    <div class="quote-box">“医生，我们接受治疗！”</div>
+    <div class="quote-box">“你好，我叫黛利拉，是个杀手。”</div>
+    <div class="quote-box">“我叫阿奇，是个小偷。”</div>
+    <div class="quote-box">“你若活着，我是你的江声浩荡，若你离去，我是你的死水微澜。”</div>
 
-  <!-- 音乐播放器按钮 -->
-  <div class="music-player" id="musicControl">🎶</div>
+    <div class="memory-slider">
+        <div class="memory-wrapper">
+            <img src="https://i.postimg.cc/nLrjTW6P/20250416235438.jpg" alt="小黛和阿奇唯一一张照片" class="memory-image active">
+            <img src="https://i.postimg.cc/SsXZ0DzZ/20250416235407.jpg" alt="狂超帮未来老大和她的左膀右臂" class="memory-image">
+            <img src="https://i.postimg.cc/NFs59P7D/20250416235426.jpg" alt="陪小黛画了好久最后却送给奥丁的唱片" class="memory-image">
+            <img src="https://i.postimg.cc/nzjtdKVx/20250416235430.jpg" alt="给聿拍的还挺帅，哼!" class="memory-image">
+            <img src="https://i.postimg.cc/FsQQZJMt/20250416235434.jpg" alt="我真帅" class="memory-image">
+            <div class="alt-text" id="altText"></div>
+        </div>
+    </div>
 
-  <!-- 背景音乐 -->
-  <audio id="bgMusic" preload="auto" loop>
-    <source src="https://liuyifang-0320.github.io/DaiLILa3/yuan_yuea.mp3" type="audio/mpeg" />
-    您的浏览器不支持 audio 元素。
-  </audio>
+    <div class="music-player" id="musicControl">🎶</div>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      const audio = document.getElementById('bgMusic');
-      const musicControl = document.getElementById('musicControl');
-      const quoteBox = document.getElementById('quoteBox');
-      const quotes = [
-        "“黛利拉，记住，有爱，就会归来”",
-        "“凭此船票，无限登船”",
-        "“小黛值得世间一切美好的东西”",
-        "“医生，我们接受治疗！”",
-        "“你好，我叫黛利拉，是个杀手。”",
-        "“我叫阿奇，是个小偷。”",
-        "“你若活着，我是你的江声浩荡，若你离去，我是你的死水微澜。”"
-      ];
+    <audio id="bgMusic" loop>
+        <source src="https://liuyifang-0320.github.io/DaiLILa3/%E4%BB%BB%E7%84%B6;%20%E5%B0%8F%E6%9D%A5%20-%20%E9%9B%80%E8%B7%83.mp3" type="audio/mpeg">
+    </audio>
 
-      let isPlaying = false;
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const audio = document.getElementById('bgMusic');
+            const musicControl = document.getElementById('musicControl');
+            const quoteBoxes = document.querySelectorAll('.quote-box');
+            let isPlaying = false;
 
-      // 首次用户操作时允许音频加载（移动端限制）
-      document.body.addEventListener('touchstart', () => {
-        audio.load();
-      }, { once: true });
+            musicControl.addEventListener('click', function() {
+                if (!isPlaying) {
+                    audio.play().then(() => {
+                        isPlaying = true;
+                    }).catch(e => {
+                        console.error('播放错误:', e);
+                    });
+                } else {
+                    audio.pause();
+                    isPlaying = false;
+                }
+            });
 
-      musicControl.addEventListener('click', function () {
-        if (!isPlaying) {
-          audio.play().then(() => {
-            isPlaying = true;
-            musicControl.textContent = "🔊";
-          }).catch(e => {
-            alert("⚠️ 请点击按钮播放音乐，或检查手机静音状态");
-            console.error(e);
-          });
-        } else {
-          audio.pause();
-          isPlaying = false;
-          musicControl.textContent = "🎶";
-        }
-      });
+            let index = 0;
+            function showQuotes() {
+                if (index < quoteBoxes.length) {
+                    quoteBoxes[index].classList.add('show');
+                    setTimeout(() => {
+                        quoteBoxes[index].classList.remove('show');
+                        index++;
+                        showQuotes();
+                    }, 4000);
+                }
+            }
+            showQuotes();
 
-      // 自动轮播语录
-      let index = 0;
-      function showQuote() {
-        quoteBox.classList.remove("show");
-        setTimeout(() => {
-          quoteBox.textContent = quotes[index];
-          quoteBox.classList.add("show");
-          index = (index + 1) % quotes.length;
-        }, 1000);
-      }
-      setInterval(showQuote, 5000); // 每5秒一条
-      showQuote(); // 初始化
+            const memoryImages = document.querySelectorAll('.memory-image');
+            const altText = document.getElementById('altText');
+            let currentImage = 0;
 
-      // 流星效果
-      function createMeteor() {
-        const meteor = document.createElement('div');
-        meteor.className = 'meteor';
-        meteor.style.left = Math.random() * window.innerWidth + 'px';
-        document.body.appendChild(meteor);
-        setTimeout(() => meteor.remove(), 2000);
-      }
-      setInterval(createMeteor, 100);
-    });
-  </script>
-</body>
-</html>
-
+            function rotateImages() {
+                memoryImages[currentImage].classList.remove('active');
+                currentImage = (currentImage + 1) % memoryImages.length;
+                memoryImages[currentImage].classList.add('active');
+                altText.textContent = memoryImages[currentImage].alt;
+                altText.style.opacity = 1;
+                setTimeout(() => {
+                    altText.style.opacity = 0;
+                }, 3000);
+            }
+            altText.textContent = memoryImages[0].alt;
+            altText.style.opacity = 1;
+            setTimeout(() => {
+                altText.style.opacity = 0;
+            }, 3000);
+            setInterval(rotateImages, 5000);
+        });
     </script>
 
 </body>
